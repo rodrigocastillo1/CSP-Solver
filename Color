@@ -1,0 +1,18 @@
+def is_safe(n, graph, colors, c):
+
+    for i in xrange(n):
+        if graph[n][i] and c == colors[i]: return False
+    return True
+
+
+def graphColoringUtil(graph, color_nb, colors, n): # Comprobar si todos son asignados un color 
+    if color_nb+1 == n :
+        return True
+
+    
+    for c in xrange(1, color_nb+1): # Comprobar si la asignación de color C para n es posible
+        if is_safe(n, graph, colors, c):# Asiganar color de c a n
+            colors[n] = c
+            
+            if graphColoringUtil(graph, color_nb, colors, n+1): return True # Si no tiene solucion eliminar color
+            colors[n] = 0
